@@ -329,6 +329,7 @@ func checkPersistentStatePaths(persistentStatePaths []string) error {
 }
 
 func checkSystemSettings(systemSettings map[string]string) error {
+	logrus.Infof("systemSettings: %v", systemSettings)
 	if systemSettings == nil {
 		return nil
 	}
@@ -344,10 +345,13 @@ func checkSystemSettings(systemSettings map[string]string) error {
 		}
 
 		if systemSetting == "containerd-registry" {
+			logrus.Infof("Check setting containerd-registry, value: %s", value)
 			var r registries.Registry
 			if err := json.NewDecoder(strings.NewReader(value)).Decode(&r); err != nil {
+				logrus.Infof("Check setting containerd-registry, error: %v", err)
 				return errors.New(ErrContainerdRegistrySettingNotValidJSON)
 			}
+			logrus.Info("Check setting containerd, no error")
 		}
 
 		if !isValid {
