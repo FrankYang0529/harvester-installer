@@ -216,6 +216,9 @@ type HarvesterConfig struct {
 	HarvesterChartVersion               string            `json:"harvesterChartVersion,omitempty"`
 	MonitoringChartVersion              string            `json:"monitoringChartVersion,omitempty"`
 	SystemUpgradeControllerChartVersion string            `json:"systemUpgradeControllerChartVersion,omitempty"`
+	FleetChartVersion                   string            `json:"fleetChartVersion,omitempty"`
+	FleetCRDChartVersion                string            `json:"fleetCRDChartVersion,omitempty"`
+	FleetAgentChartVersion              string            `json:"fleetAgentChartVersion,omitempty"`
 	SystemSettings                      map[string]string `json:"systemSettings,omitempty"`
 	LoggingChartVersion                 string            `json:"loggingChartVersion,omitempty"`
 }

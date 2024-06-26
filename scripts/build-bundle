@@ -111,6 +111,17 @@ helm pull https://charts.rancher.io/assets/system-upgrade-controller/system-upgr
 # make chart sanity check
 tar zxvf ${CHARTS_DIR}/system-upgrade-controller-${SYSTEM_UPGRADE_CONTROLLER_VERSION}.tgz >/dev/null  --warning=no-timestamp
 
+# Prepare fleet, fleet-crd, and fleet-agent chart
+source ${SCRIPTS_DIR}/version-fleet
+helm pull https://charts.rancher.io/assets/fleet/fleet-${FLEET_CHART_VERSION}.tgz -d ${CHARTS_DIR}
+helm pull https://charts.rancher.io/assets/fleet-crd/fleet-crd-${FLEET_CRD_CHART_VERSION}.tgz -d ${CHARTS_DIR}
+helm pull https://charts.rancher.io/assets/fleet-agent/fleet-agent-${FLEET_AGENT_CHART_VERSION}.tgz -d ${CHARTS_DIR}
+
+# make chart sanity check
+tar zxvf ${CHARTS_DIR}/fleet-${FLEET_CHART_VERSION}.tgz >/dev/null  --warning=no-timestamp
+tar zxvf ${CHARTS_DIR}/fleet-crd-${FLEET_CRD_CHART_VERSION}.tgz >/dev/null  --warning=no-timestamp
+tar zxvf ${CHARTS_DIR}/fleet-agent-${FLEET_AGENT_CHART_VERSION}.tgz >/dev/null  --warning=no-timestamp
+
 # skip addons for now for arm builds
 if [ ${ARCH} == "amd64" ]; then
   # Prepare vm-import-controller-chart

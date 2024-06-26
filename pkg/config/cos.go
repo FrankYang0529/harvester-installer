@@ -47,6 +47,9 @@ var (
 	MonitoringChartVersion              = ""
 	LoggingChartVersion                 = ""
 	SystemUpgradeControllerChartVersion = ""
+	FleetChartVersion                   = ""
+	FleetCRDChartVersion                = ""
+	FleetAgentChartVersion              = ""
 
 	originalNetworkConfigs        = make(map[string][]byte)
 	saveOriginalNetworkConfigOnce sync.Once
