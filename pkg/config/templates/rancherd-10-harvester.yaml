@@ -66,6 +66,27 @@ resources:
               name: rancher
               port:
                 number: 80
+# TODO: use HelmChart to install fleet and fleet-crd after removing rancher
+# - apiVersion: helm.cattle.io/v1
+#   kind: HelmChart
+#   metadata:
+#     name: fleet-crd
+#     namespace: cattle-system
+#   spec:
+#     chart: fleet-crd
+#     version: {{ .FleetChartVersion }}
+#     repo: http://harvester-cluster-repo.cattle-system.svc/charts
+# - apiVersion: helm.cattle.io/v1
+#   kind: HelmChart
+#   metadata:
+#     name: fleet
+#     namespace: cattle-system
+#   spec:
+#     chart: fleet
+#     version: {{ .FleetChartVersion }}
+#     createNamespace: true
+#     targetNamespace: cattle-system
+#     repo: http://harvester-cluster-repo.cattle-system.svc/charts
 - apiVersion: helm.cattle.io/v1
   kind: HelmChart
   metadata:
@@ -82,6 +103,120 @@ resources:
         cattle:
           psp:
             enabled: false
+# - apiVersion: fleet.cattle.io/v1alpha1
+#   kind: Bundle
+#   metadata:
+#     name: harvester
+#     namespace: cattle-system
+#   spec:
+#     defaultNamespace: harvester-system
+#     diff:
+#       comparePatches:
+#       - apiVersion: storage.k8s.io/v1
+#         jsonPointers:
+#         - /metadata/annotations
+#         kind: StorageClass
+#         name: harvester-longhorn
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: engineimages.longhorn.io
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: nodes.longhorn.io
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: volumes.longhorn.io
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: settings.longhorn.io
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: replicas.longhorn.io
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: instancemanagers.longhorn.io
+#       - apiVersion: apiextensions.k8s.io/v1
+#         jsonPointers:
+#         - /status/acceptedNames
+#         - /status/conditions
+#         - /status/storedVersions
+#         kind: CustomResourceDefinition
+#         name: engines.longhorn.io
+#     helm:
+#       releaseName: harvester
+#       repo: http://harvester-cluster-repo.cattle-system.svc/charts
+#       version: 1.3.1
+#       values:
+#         containers:
+#           apiserver:
+#             hciMode: true
+#             image:
+#               imagePullPolicy: IfNotPresent
+#         harvester-load-balancer:
+#           enabled: true
+#         harvester-network-controller:
+#           enabled: true
+#           image:
+#             pullPolicy: IfNotPresent
+#           vipEnabled: true
+#         harvester-node-disk-manager:
+#           enabled: true
+#           image:
+#             pullPolicy: IfNotPresent
+#           labelFilter:
+#           - COS_*
+#           - HARV_*
+#         kube-vip:
+#           enabled: true
+#         kube-vip-cloud-provider:
+#           enabled: true
+#         kubevirt:
+#           spec:
+#             monitorAccount: rancher-monitoring-operator
+#             monitorNamespace: cattle-monitoring-system
+#         longhorn:
+#           defaultSettings:
+#             defaultDataPath: /var/lib/harvester/defaultdisk
+#             taintToleration: kubevirt.io/drain:NoSchedule
+#           enabled: true
+#         multus:
+#           enabled: false
+#         rancherEmbedded: true
+#         replicas: 2
+#         service:
+#           vip:
+#             enabled: true
+#             hwAddress: 02:00:00:03:3D:61
+#             ip: 192.168.3.131
+#             mode: dhcp
+#         webhook:
+#           image:
+#             imagePullPolicy: IfNotPresent
+#           replicas: 2
 - apiVersion: helm.cattle.io/v1
   kind: HelmChart
   metadata:
