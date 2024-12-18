@@ -1,7 +1,7 @@
 rancherValues:
   rancherImagePullPolicy: IfNotPresent
-  rancherImage: rancher/rancher
-  rancherImageTag: v2.8.5
+  rancherImage: registry.suse.com/rancher/rancher
+  rancherImageTag: v2.8.10
   noDefaultAdmin: false
   features: multi-cluster-management=false,multi-cluster-management-agent=false
   useBundledSystemChart: true
@@ -14,4 +14,4 @@ rancherValues:
   extraEnv:
     - name: CATTLE_SHELL_IMAGE
       value: "rancher/shell:v0.1.26"
-rancherInstallerImage: rancher/system-agent-installer-rancher:v2.8.5
+rancherInstallerImage: stgregistry.suse.com/rancher/system-agent-installer-rancher:v2.8.10

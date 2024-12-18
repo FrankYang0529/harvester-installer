@@ -7,7 +7,7 @@ role: cluster-init
 token: {{ printf "%q" .Token }}
 kubernetesVersion: {{ .RuntimeVersion }}
 rancherVersion: {{ .RancherVersion }}
-rancherInstallerImage: rancher/system-agent-installer-rancher:{{ .RancherVersion }}
+rancherInstallerImage: stgregistry.suse.com/rancher/system-agent-installer-rancher:{{ .RancherVersion }}
 labels:
  - harvesterhci.io/managed=true
 extraConfig:

@@ -58,7 +58,7 @@ update_rancher_deps()
   local fleet_versions="${WORKING_DIR}/fleet-versions.txt"
   local webhook_versions="${WORKING_DIR}/webhook-versions.txt"
   local rancher_build_yaml="${WORKING_DIR}/rancher-build.yaml"
-  local rancher_image="rancher/rancher:$rancher_version"
+  local rancher_image="registry.suse.com/rancher/rancher:$rancher_version"
 
   # Get min verseion from rancher image's env variables
   curl https://raw.githubusercontent.com/rancher/rancher/$rancher_version/build.yaml -o $rancher_build_yaml
