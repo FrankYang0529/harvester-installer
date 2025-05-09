@@ -1,7 +1,7 @@
 rancherValues:
   rancherImagePullPolicy: IfNotPresent
-  rancherImage: rancher/rancher
-  rancherImageTag: v2.11.0
+  rancherImage: myship04/rancher
+  rancherImageTag: mcm-amd64-head
   noDefaultAdmin: false
   features: multi-cluster-management=false,multi-cluster-management-agent=false,managed-system-upgrade-controller=false
   useBundledSystemChart: true
